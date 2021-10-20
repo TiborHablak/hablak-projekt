@@ -15,21 +15,18 @@
                         list($k,$h) = explode('::', $riadok);
                         $menu[$k] = $h;
                     }                    
+                    
 
                     foreach($menu as $key => $value){
 
                         echo '<li class="nav-item">
-                                <a class="nav-link '.'"  href="#">'.$value.'</a>
+                                <a class="nav-link '.'" href="../../hablak/public/theme/'.$key.'">'.$value.'</a>
                              </li>';
                     }
                     
                 ?>
        <li class="nav-item">
-                <a class="nav-link">
-                <form action="" method="post" class="" >
-                <button type="submit"  class="btn btn-link  p-0">Prihlasiť sa</button>
-                </form> 
-            </a>
+              
         </li>
                 </ul>
             </div>

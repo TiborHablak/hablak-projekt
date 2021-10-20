@@ -1,7 +1,7 @@
 <?php 
 include'../../assets/header.php';
 include'../../assets/menu.php';
-include '../../../admin/session.php';
+
 
 	$imageAll = glob('*', GLOB_ONLYDIR);
 	$idGallery = isset($_GET['id'])? $_GET['id'] : '0';

@@ -16,10 +16,11 @@
                         $menu[$k] = $h;
                     }                    
 
+                    
                     foreach($menu as $key => $value){
 
                         echo '<li class="nav-item">
-                                <a class="nav-link '.'"  href="../public/theme/'.$key.'">'.$value.'</a>
+                                <a class="nav-link '.'" href="../../hablak/public/theme/'.$key.'">'.$value.'</a>
                              </li>';
                     }
                     

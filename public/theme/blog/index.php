@@ -3,7 +3,6 @@ date_default_timezone_get("Europe/Bratislava");
 include '../../assets/header.php';
 include '../../assets/menu.php';
 include '../../assets/rozne.php';
-include '../../../admin/session.php';
 error_reporting(0);
 
 ?>

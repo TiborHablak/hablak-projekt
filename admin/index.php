@@ -26,16 +26,14 @@ include '../admin/assets/hlavickaAdmin.php';
                     foreach($menu as $key => $value){
 
                         echo '<li class="nav-item">
-                                <a class="nav-link '.'"  href="../../public/theme/'.$key.'">'.$value.'</a>
+                                <a class="nav-link '.'"  href="../../hablak/public/theme/'.$key.'">'.$value.'</a>
                              </li>';
                     }
                     
                 ?>
                 <li class="nav-item">
                 <a class="nav-link" href="#">
-                <form action="index.php" method="POST" class="" >
-   		  		<button type="submit" name="clear-session" class="btn btn-link p-0">Odhlasiť sa</button>
-				</form>	
+              
 			</a>
 		</li>
 
@@ -125,6 +123,9 @@ include '../admin/assets/hlavickaAdmin.php';
            
         </ul>
 
+        <form action="index.php" method="POST" class="" >
+                <button type="submit" name="clear-session" class="btn btn-link p-0">Odhlasiť sa</button>
+                </form> 
     </nav>
 
 		

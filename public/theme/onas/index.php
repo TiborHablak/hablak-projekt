@@ -1,7 +1,7 @@
 <?php 
 include'../../assets/header.php';
 include'../../assets/menu.php';
-include '../../../admin/session.php';
+
 ?>
 
 <section>

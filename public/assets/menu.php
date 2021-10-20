@@ -34,9 +34,7 @@
                 ?>
                    <li class="nav-item">
                 <a class="nav-link" href="#">
-                <form action="index.php" method="POST" class="" >
-                <button type="submit" name="clear-session" class="btn btn-link p-0">Odhlasiť sa</button>
-                </form> 
+               
             </a>
         </li>
                 </ul>
@@ -44,3 +42,4 @@
         </nav>
     </div>
     <div class="container">
+

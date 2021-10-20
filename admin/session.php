@@ -7,7 +7,7 @@ if (!isset($_SESSION['user']))
 }
 if ($_SESSION['user']['isLoggedIn'] === false)
 {
-    header('Location: ../../../admin//prihlasenie.php');
+    header('Location: ../../../admin/prihlasenie.php');
 }
 
 
@@ -17,4 +17,3 @@ if(isset($_POST['clear-session']))
 session_destroy();
 }
 ?>
- ?>
