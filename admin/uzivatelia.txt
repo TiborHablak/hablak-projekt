@@ -1,0 +1,2 @@
+admin::admin123::Jurko Janošik::admin
+ziak::ziak123::Tibor Hablak::ziak
