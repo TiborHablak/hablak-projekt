@@ -21,6 +21,8 @@ if (!isset($_SESSION['pouzivatelia']))
 <?php
 $meno = $_POST['meno'];
 $heslo = md5($_POST['heslo']);
+$pole_mien = array();
+$chyba = "";
 
 
 $servername = "localhost";
@@ -36,40 +38,25 @@ if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
 echo "Connected successfully";
-
 ?>
-
-
 <div class="container">
 
 
-
-<?php
-
-  
+<?php 
   if ($_SERVER['REQUEST_METHOD'] === 'POST')
   {
     $sql = 'SELECT * FROM uzivatelia WHERE login = \'' . $meno . '\' AND heslo = \'' . $heslo . '\'';
     $result = $conn->query($sql);
    
     if ($result->num_rows > 0) {
-
-        $_SESSION['user'] = ['username' => $name, 'isLoggedIn' => true ];
-        header('Location: ./index.php');
+       
+        $_SESSION['user'] = ['username' => $name, 'isLoggedIn' => true, 'user_info' => $row['meno'], 'user_roll' => $row['rola']];
+       header('Location: ./index.php');
         
-    }
-  
-  }  
-  /*  
-foreach ($uzivatelia as $uzivatel)
-{
-    list($meno, $heslo, $uzivatel, $rola) = explode('::', $uzivatel);
-    $prihlasenie[$meno] = $heslo;
-    $prihlasovanie[$uzivatel] = $rola;
-}
+    }  else
+    $chyba = "nespravne meno alebo heslo!";
 
-$chyba = "";
-*/
+  }  
 ?>
 
 <?php
@@ -94,9 +81,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
           else
         $chyba = "nespravne meno alebo heslo!";
     }
-
-
-
+*/
 
 if(!empty($chyba)){
 
@@ -111,12 +96,8 @@ if(!empty($chyba)){
 
 <?php 
 }
-}
-*/
  ?>
  
-
-
 <section class=" p-5">
     <div class="container-sm border">
          <h4 class="text-sm-center font-weight-bold p-3 bg-light border"> Prihlasenie </h4>
@@ -160,13 +141,7 @@ if(!empty($chyba)){
         </div>  
     </form>
     </div>
-
-
-
-
  <?php
-
 include '../admin/assets/paticka.php';
-
 ?>
 

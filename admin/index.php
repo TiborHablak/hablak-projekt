@@ -50,31 +50,29 @@ include '../admin/assets/hlavickaAdmin.php';
     </div>
     
 
-	<?php  
+	<?php
 	session_start();
 
 	if (!isset($_SESSION['user']))
 	{
-	    $_SESSION['user'] = ['username' => null, 'isLoggedIn' => false];
+        $_SESSION['user'] = ['username' => null, 'isLoggedIn' => false];
 	}
 	if ($_SESSION['user']['isLoggedIn'] === false)
 	{
 	    header('Location: ./prihlasenie.php');
 	}
-
+    var_dump($_SESSION);  
 
 
 	?>
-
-
-
-
 	<?php 
 	if(isset($_POST['clear-session']))
 	{ 
 	session_destroy();
 	}
-	?>
+	
+    ?>
+
 
 
 
@@ -90,12 +88,10 @@ include '../admin/assets/hlavickaAdmin.php';
   <path d="M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm-1 7a3 3 0 1 1-6 0 3 3 0 0 1 6 0zm-3 4c2.623 0 4.146.826 5 1.755V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-1.245C3.854 11.825 5.377 11 8 11z"/>
 </svg>
 
-					<?php 
-					 echo $_SESSION['pouzivatelia']['menoUzivatela'];
-					 ?>
+					
 				</h3>
 				<h5 class="text-gray-dark font-weight-bold text-center">
-					<?php echo $_SESSION['pouzivatelia']['rolaUzivatela']; ?>
+					<?php echo $_SESSION['user']['user_info']['user_roll']; ?>
 				</h5>
 			<div class="wrapper">
     <!-- Sidebar -->
