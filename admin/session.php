@@ -16,6 +16,7 @@ if ($_SESSION['user']['isLoggedIn'] === false)
 
 if(isset($_POST['clear-session']))
 { 
-session_destroy();
+session_destroy(); 
+
 }
 ?>

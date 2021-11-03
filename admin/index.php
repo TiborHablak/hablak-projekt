@@ -1,6 +1,7 @@
 <?php
+ // header('Location: ./prihlasenie.php');
 include '../admin/assets/hlavickaAdmin.php';
-
+error_reporting(0);
 ?>
     <div class="container-fluid bg-dark">
 
@@ -61,7 +62,7 @@ include '../admin/assets/hlavickaAdmin.php';
 	{
 	    header('Location: ./prihlasenie.php');
 	}
-    var_dump($_SESSION);  
+ 
 
 
 	?>
@@ -84,15 +85,17 @@ include '../admin/assets/hlavickaAdmin.php';
 
 			
 				<h3 class="text-light text-center font-weight-bold ">
-<svg xmlns="http://www.w3.org/2000/svg" width="30 " height="30" fill="currentColor" class="bi bi-file-person-fill" viewBox="0 0 20 20">
+<svg xmlns="http://www.w3.org/2000/svg" width="150 " height="100" fill="currentColor" class="bi bi-file-person-fill" viewBox="0 0 20 20">
   <path d="M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm-1 7a3 3 0 1 1-6 0 3 3 0 0 1 6 0zm-3 4c2.623 0 4.146.826 5 1.755V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-1.245C3.854 11.825 5.377 11 8 11z"/>
 </svg>
 
-					
 				</h3>
-				<h5 class="text-gray-dark font-weight-bold text-center">
-					<?php echo $_SESSION['user']['user_info']['user_roll']; ?>
+
+				<h5 class="text-gray-dark font-weight-bold text-center "> <ins>
+					<?php echo $_SESSION['user']['user_info']; ?> </ins> <br>
+                    <small  class="text-gray-dark font-weight-bold "> <?php echo $_SESSION['user']['user_roll']; ?> </small>
 				</h5>
+                
 			<div class="wrapper">
     <!-- Sidebar -->
     <nav id="sidebar ">
@@ -121,7 +124,7 @@ include '../admin/assets/hlavickaAdmin.php';
         </ul>
 
         <form action="index.php" method="POST" class="" >
-                <button type="submit" name="clear-session" class="btn btn-link p-0">Odhlasiť sa</button>
+                <button type="submit" name="clear-session" class="btn btn-link p-0 ">Odhlasiť sa</button>
                 </form> 
     </nav>
 

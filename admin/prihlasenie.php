@@ -8,12 +8,7 @@ session_start();
 
 if (!isset($_SESSION['user']))
 {
-    $_SESSION['user'] = ['username' => null, 'isLoggedIn' => false];
-
-}
-if (!isset($_SESSION['pouzivatelia']))
-{
-    $_SESSION['pouzivatelia'] = ['menoUzivatela' => null, 'rolaUzivatela' => null];
+    $_SESSION['user'] = ['username' => null, 'isLoggedIn' => false , 'user_info' => null, 'user_roll' => null];
 
 }
 
@@ -21,8 +16,9 @@ if (!isset($_SESSION['pouzivatelia']))
 <?php
 $meno = $_POST['meno'];
 $heslo = md5($_POST['heslo']);
-$pole_mien = array();
 $chyba = "";
+
+
 
 
 $servername = "localhost";
@@ -37,7 +33,7 @@ $conn = new mysqli($servername, $username, $password, $db);
 if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
-echo "Connected successfully";
+
 ?>
 <div class="container">
 
@@ -49,10 +45,15 @@ echo "Connected successfully";
     $result = $conn->query($sql);
    
     if ($result->num_rows > 0) {
-       
-        $_SESSION['user'] = ['username' => $name, 'isLoggedIn' => true, 'user_info' => $row['meno'], 'user_roll' => $row['rola']];
-       header('Location: ./index.php');
-        
+      while($row = $result->fetch_assoc()) {
+        $priezvisko = $row['meno'];
+        $rola_id = $row['rola'];
+      }
+    
+      
+        $_SESSION['user'] = ['username' => $name, 'isLoggedIn' => true, 'user_info' => $priezvisko, 'user_roll' => $rola_id];
+     header('Location: ./index.php');
+ 
     }  else
     $chyba = "nespravne meno alebo heslo!";
 
@@ -114,7 +115,7 @@ if(!empty($chyba)){
             </div>
             <div class="form-group was-validated">
                 <strong> Heslo </strong>
-                <input type="text" placeholder="Heslo autora" class="form-control" required autocomplete=""   name="heslo"  value=""> 
+                <input type="password" placeholder="Heslo autora" class="form-control" required autocomplete=""   name="heslo"  value=""> 
                 <div class="invalid-feedback">
                     Zadajte prosím správne  heslo
                 </div>
