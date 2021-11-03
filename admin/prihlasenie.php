@@ -18,12 +18,49 @@ if (!isset($_SESSION['pouzivatelia']))
 }
 
 ?>
+<?php
+$meno = $_POST['meno'];
+$heslo = md5($_POST['heslo']);
+
+
+$servername = "localhost";
+$username = "hablak";
+$password = "hablak";
+$db = "demo21";
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $db);
+
+// Check connection
+if ($conn->connect_error) {
+  die("Connection failed: " . $conn->connect_error);
+}
+echo "Connected successfully";
+
+?>
+
+
 <div class="container">
 
 
-<?php
-$uzivatelia = file('uzivatelia.txt', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
 
+<?php
+
+  
+  if ($_SERVER['REQUEST_METHOD'] === 'POST')
+  {
+    $sql = 'SELECT * FROM uzivatelia WHERE login = \'' . $meno . '\' AND heslo = \'' . $heslo . '\'';
+    $result = $conn->query($sql);
+   
+    if ($result->num_rows > 0) {
+
+        $_SESSION['user'] = ['username' => $name, 'isLoggedIn' => true ];
+        header('Location: ./index.php');
+        
+    }
+  
+  }  
+  /*  
 foreach ($uzivatelia as $uzivatel)
 {
     list($meno, $heslo, $uzivatel, $rola) = explode('::', $uzivatel);
@@ -32,12 +69,11 @@ foreach ($uzivatelia as $uzivatel)
 }
 
 $chyba = "";
+*/
 ?>
 
-
-
 <?php
-
+/*
 if ($_SERVER['REQUEST_METHOD'] === 'POST')
 {
 
@@ -62,8 +98,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
 
 
 
-
-
 if(!empty($chyba)){
 
 ?>
@@ -78,7 +112,9 @@ if(!empty($chyba)){
 <?php 
 }
 }
+*/
  ?>
+ 
 
 
 <section class=" p-5">
@@ -97,7 +133,7 @@ if(!empty($chyba)){
             </div>
             <div class="form-group was-validated">
                 <strong> Heslo </strong>
-                <input type="text" placeholder="Meno autora" class="form-control" required autocomplete=""   name="heslo"  value=""> 
+                <input type="text" placeholder="Heslo autora" class="form-control" required autocomplete=""   name="heslo"  value=""> 
                 <div class="invalid-feedback">
                     Zadajte prosím správne  heslo
                 </div>
@@ -133,3 +169,4 @@ if(!empty($chyba)){
 include '../admin/assets/paticka.php';
 
 ?>
+
