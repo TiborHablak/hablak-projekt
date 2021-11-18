@@ -1,8 +1,30 @@
 <?php
  // header('Location: ./prihlasenie.php');
 include '../admin/assets/hlavickaAdmin.php';
+include '../../hablak/public/assets/rozne.php';
 error_reporting(0);
 ?>
+<?php
+
+$servername = "localhost";
+$username = "hablak";
+$password = "hablak";
+$db = "prispevky_hablak";
+
+
+$conn = new mysqli($servername, $username, $password, $db);
+
+if ($conn->connect_error) {
+  die("Connection failed: " . $conn->connect_error);
+}
+
+?>
+
+
+
+<head>
+  <link rel="stylesheet" href="../../hablak/admin/assets/css/style.css">
+</head>
     <div class="container-fluid bg-dark">
 
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark container sticky-top">
@@ -75,10 +97,6 @@ error_reporting(0);
     ?>
 
 
-
-
-    
-
 <section>
 	<div class="row flex-shrink-1" >
 		<div class="col-2  bg-secondary p-4 ">
@@ -128,15 +146,47 @@ error_reporting(0);
                 </form> 
     </nav>
 
-		
-				
+   
+  
 
-
-				
-				
-	
 	</div>
 </section>
+<section>
+    <div class= "container">
+<?php 
+
+$sql = "SELECT * FROM prispevky";
+$result = mysqli_query($conn, $sql);
+
+if (mysqli_num_rows($result) > 0) {
+    echo '<table class="table mt-2">';
+  while($row = mysqli_fetch_assoc($result)) {
+   
+	echo '<tr><th>' .$row["meno"]. '</th>';
+	 echo '<th>' .$row["cas"]. '</th>';
+	echo '<th>'
+		 .prelozBBCode($row["prispevok"]);
+	
+   echo '</th><th>';
+    ?>
+    
+    <button type="button" class="btn btn-danger">Zmazať</button>
+   <?php 
+  echo '</th></tr>';
+  }
+ 
+  
+
+  echo '</table>';
+} 
+
+?>
+</div>
+</section>
+
+
+
+
 
 
     

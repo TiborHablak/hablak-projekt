@@ -8,6 +8,23 @@ error_reporting(0);
 ?>
 
 
+<?php
+
+$servername = "localhost";
+$username = "hablak";
+$password = "hablak";
+$db = "prispevky_hablak";
+
+
+$conn = new mysqli($servername, $username, $password, $db);
+
+if ($conn->connect_error) {
+  die("Connection failed: " . $conn->connect_error);
+}
+
+?>
+
+
 
 <?php
 
@@ -19,7 +36,6 @@ $kontrola = "";
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST')
 {
-
 $kontrola = kontrola($_POST['sprava'])
 
 ?>
@@ -104,6 +120,7 @@ $vybranyKluc = array_rand($antiSpam);
 $prispevky = [];
 $suborPrispevky = fopen('prispevky.csv', 'r');
 
+/*
 while ($prispevok = fgetcsv($suborPrispevky, 1000, ';'))
 {
     $prispevky[] = $prispevok;
@@ -112,6 +129,7 @@ while ($prispevok = fgetcsv($suborPrispevky, 1000, ';'))
 fclose($suborPrispevky);
 
 $prispevky = array_reverse($prispevky);
+*/
 ?>
 
 
@@ -167,6 +185,22 @@ $prispevky = array_reverse($prispevky);
 	<hr class="border-dark"> 
 	<div class="container">
 		<?php
+
+$sql = "SELECT * FROM prispevky";
+$result = mysqli_query($conn, $sql);
+
+if (mysqli_num_rows($result) > 0) {
+  while($row = mysqli_fetch_assoc($result)) {
+	echo '<h4>' .$row["meno"]. '</h4>';
+	 echo '<small><i>  Odoslane: ' .$row["cas"]. '</i></small>';
+	echo '<p>'
+		 .prelozBBCode($row["prispevok"]);
+	'</p>';
+	echo '<hr>';
+  }
+} 
+
+/*
 foreach ($prispevky as $prispevok)
 {
     $datum = strtotime($prispevok[3]);
@@ -180,7 +214,7 @@ foreach ($prispevky as $prispevok)
 			</p>
 			<hr>
 		<?php
-}
+}*/
 ?>
 	</div>
 </section>

@@ -6,20 +6,11 @@ error_reporting(0);
 
 session_start();
 
-if (!isset($_SESSION['user']))
-{
-    $_SESSION['user'] = ['username' => null, 'isLoggedIn' => false , 'user_info' => null, 'user_roll' => null];
-
-}
-
 ?>
 <?php
 $meno = $_POST['meno'];
 $heslo = md5($_POST['heslo']);
 $chyba = "";
-
-
-
 
 $servername = "localhost";
 $username = "hablak";
