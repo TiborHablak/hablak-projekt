@@ -18,7 +18,7 @@
                     //$menu = [];
 
                     $riadky = file('../../assets/menu.txt', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
-
+                  
                     foreach ($riadky as $riadok) {
                         list($k,$h) = explode('::', $riadok);
                         $menu[$k] = $h;

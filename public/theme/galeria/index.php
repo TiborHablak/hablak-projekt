@@ -9,6 +9,7 @@ include'../../assets/menu.php';
 	$imageDescription = file_get_contents($imageAll[$idGallery] . '/description.txt');
 	$image = $imageAll[$idGallery] . '/thumb.jpg';
 
+
 	foreach ($imageAll as $filename) {
     	$imagesTitle[] = file_get_contents($filename . '/' . basename($filename) .'.txt');  		
 	}
