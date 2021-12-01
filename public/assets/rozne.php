@@ -28,4 +28,9 @@ function kontrola($premenna){
 		);
 		return preg_replace($bbcode, $htmlcode, $text);
 	}
-?>
+
+
+
+	
+	?>
+

@@ -1,19 +1,15 @@
 <?php
-date_default_timezone_get("Europe/Bratislava");
+
 include '../../assets/header.php';
 include '../../assets/menu.php';
 include '../../assets/rozne.php';
 error_reporting(0);
 
-?>
-
-
-<?php
 
 $servername = "localhost";
 $username = "hablak";
 $password = "hablak";
-$db = "prispevky_hablak";
+$db = "demo4c";
 
 
 $conn = new mysqli($servername, $username, $password, $db);
@@ -23,6 +19,7 @@ if ($conn->connect_error) {
 }
 
 ?>
+
 
 
 
@@ -41,20 +38,30 @@ $kontrola = kontrola($_POST['sprava'])
 ?>
 
 <?php
+
+$name = kontrola($_POST['meno']);
+$message =  kontrola($_POST['sprava']);
+
+
     if (kontrola($_POST['odpoved']) == $_POST['spravna_odpoved'] && !empty($kontrola))
     {
+		$sql = "INSERT INTO `prispevky`(`meno`, `prispevok`) VALUES (\"$name\" , \"$message\")";
+		if ($conn->query($sql) === TRUE) {
+		
+		  } else {
+			echo "Error: " . $sql . "<br>" . $conn->error;
+		  }
+     //   $suborPrispevky = fopen('prispevky.csv', 'a');
 
-        $suborPrispevky = fopen('prispevky.csv', 'a');
+     //   $novyPrispevok = array();
 
-        $novyPrispevok = array();
+      //  $novyPrispevok[] = $_POST['pocet'] + 1;
+      //  $novyPrispevok[] = kontrola($_POST['meno']);
+       // $novyPrispevok[] = kontrola($_POST['sprava']);
+      //  $novyPrispevok[] = date('Y-m-d H:i:s', time());
 
-        $novyPrispevok[] = $_POST['pocet'] + 1;
-        $novyPrispevok[] = kontrola($_POST['meno']);
-        $novyPrispevok[] = kontrola($_POST['sprava']);
-        $novyPrispevok[] = date('Y-m-d H:i:s', time());
-
-        fputcsv($suborPrispevky, $novyPrispevok, ';');
-        fclose($suborPrispevky);
+      //  fputcsv($suborPrispevky, $novyPrispevok, ';');
+      //  fclose($suborPrispevky);
     }
     else
     {
@@ -199,6 +206,8 @@ if (mysqli_num_rows($result) > 0) {
 	echo '<hr>';
   }
 } 
+
+
 
 /*
 foreach ($prispevky as $prispevok)

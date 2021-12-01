@@ -15,7 +15,7 @@ $chyba = "";
 $servername = "localhost";
 $username = "hablak";
 $password = "hablak";
-$db = "demo21";
+$db = "demo4c";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $db);
