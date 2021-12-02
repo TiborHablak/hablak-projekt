@@ -144,38 +144,50 @@ $prispevky = array_reverse($prispevky);
 
 
 <section>
-	<h1 class="py-3 text-center">Blog na Tému: </h1>
+	
 
 	<div class="container">
+
+	<div class ="row">
+			<div class ="col-md-10">
+			<h1 class="py-3 text-center">Blog na Tému: </h1>
+			</div>
+				</div>
+
 		<form action="index.php"  method="post">
-			<div class="form-group was-validated">
+		<div class ="row">
+			<div class ="col-md-10">
+				<div class="form-group was-validated">
+
 				<small id="emailHelp" class="form-text text-muted">Napište nam svoje meno</small>
 				<input type="text" placeholder="Meno autora" class="form-control" required autocomplete="" 	pattern="\S.{4,19}" name="meno"  value="<?php echo $meno ?>"> 
 				<div class="invalid-feedback">
 					Prosim vyplnte túto položku. Zadajte 5-20 znakov!
 				</div>
+				</div>
 			</div>
-		
-			
+		</div>
+	<div class ="row mt-2">	
+		<div class ="col-md-10">
 			<div class="form-group was-validated ">
 				 <small id="emailHelp" class="form-text text-muted">Povedzte nam svoj názor</small>
 				<textarea name="sprava"  cols="98" rows="5" placeholder="Váš text" class="form-control" required><?php echo $sprava ?></textarea>
 			</div>
+		</div>	
+	</div>	
 		
 			<div class="form-group">
 					 <small> Antispam: <?php echo $antiSpam[$vybranyKluc] ?> </small> 
 			 <div class="form-group was-validated">
 
-			 	<div class="row" >	
-						<div class="col-md-7"> <input type="text" placeholder="Odpoveď" class="form-control just" required name="odpoved" pattern="<?php echo $vybranyKluc ?>" > </div>
-						<div class="col-md-4">
+			 	<div class="row mt-2" >	
+						<div class="col-md-8"> <input type="text" placeholder="Odpoveď" class="form-control just" required name="odpoved" pattern="<?php echo $vybranyKluc ?>" > </div>
+						<div class="col-md-2">
 												 <button type="reset" class="btn btn-primary float-right">Vynulovať </button>
+												 <button type="submit" class="btn btn-primary float-right">Odoslať </button>
 										
 						</div>
-						<div class="col-md-1">
-							
-													 <button type="submit" class="btn btn-primary float-right">Odoslať </button>
-						</div>
+					
 					 
 				</div>
 				
@@ -186,11 +198,12 @@ $prispevky = array_reverse($prispevky);
 			
 		
 		</form>
+		
 	</div>
 
 
-	<hr class="border-dark"> 
-	<div class="container">
+	
+	<div class="container mt-5">
 		<?php
 
 $sql = "SELECT * FROM prispevky";
@@ -198,12 +211,14 @@ $result = mysqli_query($conn, $sql);
 
 if (mysqli_num_rows($result) > 0) {
   while($row = mysqli_fetch_assoc($result)) {
-	echo '<h4>' .$row["meno"]. '</h4>';
+	echo '<div class ="row"> <div class ="col-md-10">';
+	echo ' <h4>' .$row["meno"]. '</h4>';
 	 echo '<small><i>  Odoslane: ' .$row["cas"]. '</i></small>';
-	echo '<p>'
+	echo '<br>'
 		 .prelozBBCode($row["prispevok"]);
-	'</p>';
-	echo '<hr>';
+	'';
+	echo '<hr> </div></div>';
+	
   }
 } 
 

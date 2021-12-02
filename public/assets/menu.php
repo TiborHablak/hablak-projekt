@@ -1,6 +1,6 @@
     <div class="container-fluid bg-dark">
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark container sticky-top">
-            <a class="navbar-brand" href="../domov">Stránka</a>
+        <a class="navbar-brand" href="#">SOS Tvrdošin 2021</a>
             <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
                 aria-expanded="false" aria-label="Toggle navigation"></button>
 

@@ -26,6 +26,9 @@ if ($conn->connect_error) {
 }
 
 ?>
+<head>
+  <link rel="stylesheet" href="../../hablak/admin/assets/css/style.css">
+</head>
 <div class="container">
 
 
@@ -90,12 +93,12 @@ if(!empty($chyba)){
 }
  ?>
  
-<section class=" p-5">
-    <div class="container-sm border">
-         <h4 class="text-sm-center font-weight-bold p-3 bg-light border"> Prihlasenie </h4>
+<section class="p-5">
+    <div class="container p-0 border">
+         <h4 class="text-sm-center font-weight-bold p-3 bg-light border justify-content-center"> Prihlasenie </h4>
         <form action="prihlasenie.php"  method="post" class="p-4">
             
-            <div class="form-group was-validated">
+            <div class="form-group was-validated mt-2">
                 <strong class=""> Meno </strong>
                 
                 <input type="text" placeholder="Meno autora" class="form-control" required autocomplete=""  name="meno"  value=""> 
@@ -104,7 +107,7 @@ if(!empty($chyba)){
                 </div>
 
             </div>
-            <div class="form-group was-validated">
+            <div class="form-group was-validated mt-4">
                 <strong> Heslo </strong>
                 <input type="password" placeholder="Heslo autora" class="form-control" required autocomplete=""   name="heslo"  value=""> 
                 <div class="invalid-feedback">
@@ -112,13 +115,15 @@ if(!empty($chyba)){
                 </div>
             </div>
                 
-      <div class="mb-3 form-check">
+      <div class="mt-3 form-check">
     <input type="checkbox" class="form-check-input" id="exampleCheck1">
     <label class="form-check-label text-secondary" for="exampleCheck1"> Pamätať si prihlasenie</label>
   </div>
 
-    <div class="row justify-content-md-center">
+    <div class="row mt-2">
+      <div class =" col-md-6">
          <button type="submit" class="btn btn-light border"> Prihlasiť sa </button>
+         </div>
     </div>
     <br><br>
         <div class="row justify-content-md-center">

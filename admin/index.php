@@ -23,6 +23,8 @@ if ($conn->connect_error) {
 
 
 
+
+
 <head>
   <link rel="stylesheet" href="../../hablak/admin/assets/css/style.css">
 </head>
@@ -100,10 +102,10 @@ if ($conn->connect_error) {
 
         <div class="d-flex" id="wrapper">
             <!-- Sidebar-->
-            <div class="border-end bg-white" id="sidebar-wrapper">
-                <div class="sidebar-heading border-bottom mt-2"> 	<h5 class="text-gray-dark font-weight-bold text-center ml-4 mt-5"> <ins>
+            <div class="border-end bg-dark" id="sidebar-wrapper">
+                <div class="sidebar-heading border-bottom mt-2"> 	<h5 class="text-white font-weight-bold text-center p-4 mt-5"> <ins>
 					<?php echo $_SESSION['user']['user_info']; ?> </ins> <br>
-                    <small  class="text-gray-dark font-weight-bold  "> <?php echo $_SESSION['user']['user_roll']; ?> </small> <br>
+                    <small  class="text-white font-weight-bold  "> <?php echo $_SESSION['user']['user_roll']; ?> </small> <br>
                     <svg xmlns="http://www.w3.org/2000/svg" width="150 " height="150" fill="black" class="bi bi-file-person-fill p-4" viewBox="0 0 20 20">
   <path d="M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm-1 7a3 3 0 1 1-6 0 3 3 0 0 1 6 0zm-3 4c2.623 0 4.146.826 5 1.755V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-1.245C3.854 11.825 5.377 11 8 11z"/>
 </svg>
@@ -153,7 +155,7 @@ $sql = "SELECT * FROM prispevky";
 $result = mysqli_query($conn, $sql);
 
 if (mysqli_num_rows($result) > 0) {
-    echo '<table class="table table-bordered mt-5  table-striped w-75 position-center ">';
+    echo '<table class="table table-dark table-striped  mt-5  w-75 position-center ">';
     ?>
     <tr>
       <th scope="col">MENO</th>
@@ -172,8 +174,7 @@ if (mysqli_num_rows($result) > 0) {
 	
    echo '</th><th>';
     ?>
-    
-    <button type="button" class="btn btn-danger">Zmazať</button>
+    <a  href = "#" class="btn btn-danger"  data-bs-toggle="modal"data-bs-target="#modelId">Zmazať</button>
    <?php 
   echo '</th></tr>';
   }
@@ -182,6 +183,44 @@ if (mysqli_num_rows($result) > 0) {
 } 
 
 ?>
+
+
+<!-- Modal -->
+<div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Naozaj chceš vymazať ? </h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+         
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zavrieť</button>
+        <button type="button" class="btn btn-primary">Zmazat JS</button>
+        <a href="#" class = "btn btn-primary"> Zmazat PHP </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  var modelId = document.getElementById('modelId');
+
+  modelId.addEventListener('show.bs.modal', function (event) {
+      // Button that triggered the modal
+      let button = event.relatedTarget;
+      // Extract info from data-bs-* attributes
+      let recipient = button.getAttribute('data-bs-whatever');
+
+    // Use above variables to manipulate the DOM
+  });
+</script>
+
+
 <?php 
 }
 ?>
