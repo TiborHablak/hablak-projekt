@@ -1,9 +1,37 @@
 <?php
- // header('Location: ./prihlasenie.php');
+//header('Location: ./prihlasenie.php');
 include '../admin/assets/hlavickaAdmin.php';
 include '../../hablak/public/assets/rozne.php';
 error_reporting(0);
 ?>
+
+<?php
+  session_start();
+	if (!isset($_SESSION['user']))
+	{
+        $_SESSION['user'] = ['username' => null, 'isLoggedIn' => false];
+	}
+	if ($_SESSION['user']['isLoggedIn'] === false)
+	{
+	  header('Location: ./prihlasenie.php');
+	}
+  
+  /*
+  if (!isset($_SESSION['user']))
+	{
+    header('Location: ..admin//prihlasenie.php');    
+	}
+*/
+
+	?>
+	<?php 
+	if(isset($_POST['clear-session']))
+	{ 
+	session_destroy();
+	}
+    ?>
+
+
 <?php
 
 
@@ -57,17 +85,8 @@ if ($conn->connect_error) {
                     }
                     
                 ?>
-                <li class="nav-item">
-                <a class="nav-link" href="#">
-              
-            
-			</a>
-		</li>
-
-           
                 </ul>
-            </div>
-         
+            </div>      
         </nav>
 
      
@@ -76,28 +95,7 @@ if ($conn->connect_error) {
     </div>
     
 
-	<?php
-	session_start();
 
-	if (!isset($_SESSION['user']))
-	{
-        $_SESSION['user'] = ['username' => null, 'isLoggedIn' => false];
-	}
-	if ($_SESSION['user']['isLoggedIn'] === false)
-	{
-	    header('Location: ./prihlasenie.php');
-	}
- 
-
-
-	?>
-	<?php 
-	if(isset($_POST['clear-session']))
-	{ 
-	session_destroy();
-	}
-	
-    ?>
 
 
         <div class="d-flex" id="wrapper">
@@ -127,7 +125,7 @@ if ($conn->connect_error) {
                 ?>
 
                
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#">
                     <form action="index.php" method="POST" class="" >
               <button type="submit" name="clear-session" class="btn btn-link p-0 ">Odhlasiť sa</button>
               </form>   
@@ -142,12 +140,23 @@ if ($conn->connect_error) {
           if($_GET['path'] === "blog"){
            ?>
                 <!-- Page content-->
+                  <?php
+                  session_start();
+                  $_SESSION["alert"];
+
+            
+                  if($_SESSION['alert'] === "active"){
+                  ?> 
+                     <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>Príspevok bol úspešné odstranený!</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                  </div>
+                    <?php
+                    }
+                    ?>
+
                 <div class="container-fluid justify-content-center">
-                   
-                   
- 
- 
-                  
+                
                   <?php 
                     
 
@@ -166,7 +175,9 @@ if (mysqli_num_rows($result) > 0) {
     <?php 
   while($row = mysqli_fetch_assoc($result)) {
    
-    
+  $data =  $row['id'].'::'.$row['meno'].'::'.$row['cas'].'::'.$row['prispevok'];
+  
+  
 	echo '<tr><th>' .$row["meno"]. '</th>';
 	 echo '<th>' .$row["cas"]. '</th>';
 	echo '<th>'
@@ -174,7 +185,7 @@ if (mysqli_num_rows($result) > 0) {
 	
    echo '</th><th>';
     ?>
-    <a  href = "#" class="btn btn-danger"  data-bs-toggle="modal"data-bs-target="#modelId">Zmazať</button>
+    <a  href = "#" class="btn btn-danger" data-bs-mojeData = "<?php echo $data ?>"  data-bs-toggle="modal"data-bs-target="#modelId">Zmazať</button>
    <?php 
   echo '</th></tr>';
   }
@@ -185,45 +196,63 @@ if (mysqli_num_rows($result) > 0) {
 ?>
 
 
+
+
+
 <!-- Modal -->
-<div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+<div class="modal fade" data-bs-backdrop = "static" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title">Naozaj chceš vymazať ? </h5>
+            <h5 class="modal-title">Naozaj chceš vymazať prispevok od: </h5>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
       <div class="modal-body">
-        <div class="container-fluid">
-         
+        <div  id ="obsah" class="container-fluid">
+        <p id = "text_1">  </p>
+        <p id = "text_2">  </p>
+        <p id = "text_3">  </p>
+  
+       
         </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zavrieť</button>
         <button type="button" class="btn btn-primary">Zmazat JS</button>
-        <a href="#" class = "btn btn-primary"> Zmazat PHP </a>
+        <a href="#" class = "btn btn-primary" id="idBtnZmazatPHP" name="zmazat"> Zmazat PHP </a>
       </div>
     </div>
   </div>
 </div>
 
+
 <script>
   var modelId = document.getElementById('modelId');
 
   modelId.addEventListener('show.bs.modal', function (event) {
-      // Button that triggered the modal
+    
       let button = event.relatedTarget;
-      // Extract info from data-bs-* attributes
-      let recipient = button.getAttribute('data-bs-whatever');
+      let obsah =  button.getAttribute('data-bs-mojeData');
+    // document.getElementById('obsah').innerHTML = obsah;
+      dataPole = obsah.split("::");
+      document.querySelector('#text_1').innerHTML = dataPole[1];
+      document.querySelector('#text_2').innerHTML = dataPole[2];
+      document.querySelector('#text_3').innerHTML = dataPole[3];
+  
+    document.getElementById('idBtnZmazatPHP').href = 'zmazatPHP.php?id=' + dataPole[0];
 
-    // Use above variables to manipulate the DOM
-  });
+})
+
 </script>
+
+
 
 
 <?php 
 }
 ?>
+
+
 
 
                 </div>

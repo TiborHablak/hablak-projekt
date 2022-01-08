@@ -3,7 +3,6 @@ include '../admin/assets/hlavickaAdmin.php';
 include '../admin/assets/navNeprihlaseny.php';
 
 error_reporting(0);
-
 session_start();
 
 ?>
@@ -46,8 +45,8 @@ if ($conn->connect_error) {
     
       
         $_SESSION['user'] = ['username' => $name, 'isLoggedIn' => true, 'user_info' => $priezvisko, 'user_roll' => $rola_id];
-     header('Location: ./index.php');
- 
+        header('Location: ./index.php');
+       
     }  else
     $chyba = "nespravne meno alebo heslo!";
 
